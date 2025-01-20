@@ -27,6 +27,14 @@ public class PlantController {
         List<Plant> plants = plantRepository.findAll();
         return ResponseEntity.ok(plants);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Plant> getPlantById(@PathVariable String id) {
+        Plant plant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
+        return ResponseEntity.ok(plant);
+    }
+    /*@GetMapping("/findbystatus/{status}")
+    public ResponseEntity<List<Plant>> getPlantByEnum(@PathVariable "status") Status status) {}
+    https://www.baeldung.com/spring-enum-request-param*/
     @PatchMapping("/{id}")
     public ResponseEntity<Plant> updatePlant(@PathVariable String id, @RequestBody Plant plant) {
         Plant existingPlant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
