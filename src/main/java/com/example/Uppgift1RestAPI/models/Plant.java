@@ -18,7 +18,7 @@ public class Plant {
     private int[] maintainingDifficulty = new int[]{1, 2, 3, 4, 5};
     private String requests;
     private double price;
-    private String url;
+    private String[] photo = new String[]{"url1", "url2", "url3"};
     private enum Status {
         AVAILABLE, RESERVED, EXCHANGED, SOLD
     }
@@ -90,11 +90,11 @@ public class Plant {
         this.price = price;
     }
 
-    public String getUrl() {
-        return url;
+    public String[] getUrl() {
+        return photo;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.photo = new String[]{url};
     }
 }
