@@ -18,7 +18,7 @@ public class Plant {
     private int[] maintainingDifficulty = new int[]{1, 2, 3, 4, 5};
     private String requests;
     private double price;
-    private String[] photo = new String[]{"url1", "url2", "url3"};
+    private String[] photo = new String[]{"", "", ""};
     private enum Status {
         AVAILABLE, RESERVED, EXCHANGED, SOLD
     }
