@@ -3,6 +3,7 @@ package com.example.Uppgift1RestAPI.controllers;
 
 import com.example.Uppgift1RestAPI.models.Plant;
 import com.example.Uppgift1RestAPI.repositories.PlantRepository;
+import com.example.Uppgift1RestAPI.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,14 @@ import java.util.List;
 public class PlantController {
     @Autowired
     private PlantRepository plantRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<Plant> createPlant(@RequestBody Plant plant) {
+        if(plant.getUser() != null && !userRepository.existsById(plant.getUser().getId())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
+        }
         Plant savedPlant = plantRepository.save(plant);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedPlant);
     }
@@ -32,9 +38,7 @@ public class PlantController {
         Plant plant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
         return ResponseEntity.ok(plant);
     }
-    /*@GetMapping("/findbystatus/{status}")
-    public ResponseEntity<List<Plant>> getPlantByEnum(@PathVariable "status") Status status) {}
-    https://www.baeldung.com/spring-enum-request-param*/
+
     @PatchMapping("/{id}")
     public ResponseEntity<Plant> updatePlant(@PathVariable String id, @RequestBody Plant plant) {
         Plant existingPlant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));

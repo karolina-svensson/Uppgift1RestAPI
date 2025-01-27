@@ -2,6 +2,7 @@ package com.example.Uppgift1RestAPI.models;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "plants")
@@ -10,19 +11,17 @@ public class Plant {
     private String id;
     private String trivialName;
     private String scientificName;
-    private String userId;
-    private enum Size {
-        SMALL, MEDIUM, LARGE
-    }
+
+    @DBRef User user;
+
+    private String size;
     private String lightRequirement;
     private String waterRequirement;
     private int maintainingDifficulty;
     private String requests;
     private double price;
     private String photo;
-    private enum Status {
-        AVAILABLE, RESERVED, EXCHANGED, SOLD
-    }
+    private  String status;
 
     public Plant() {
     }
@@ -98,11 +97,27 @@ public class Plant {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }
