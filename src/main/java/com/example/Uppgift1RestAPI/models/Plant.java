@@ -16,10 +16,10 @@ public class Plant {
     }
     private String lightRequirement;
     private String waterRequirement;
-    private int[] maintainingDifficulty = new int[]{1, 2, 3, 4, 5};
+    private int maintainingDifficulty;
     private String requests;
     private double price;
-    private String[] photo = new String[]{"", "", ""};
+    private String photo;
     private enum Status {
         AVAILABLE, RESERVED, EXCHANGED, SOLD
     }
@@ -67,11 +67,11 @@ public class Plant {
         this.waterRequirement = waterRequirement;
     }
 
-    public int[] getMaintainingDifficulty() {
+    public int getMaintainingDifficulty() {
         return maintainingDifficulty;
     }
 
-    public void setMaintainingDifficulty(int[] maintainingDifficulty) {
+    public void setMaintainingDifficulty(int maintainingDifficulty) {
         this.maintainingDifficulty = maintainingDifficulty;
     }
 
@@ -91,12 +91,12 @@ public class Plant {
         this.price = price;
     }
 
-    public String[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
     public void setPhoto(String photo) {
-        this.photo = new String[]{photo};
+        this.photo = photo;
     }
     public String getUserId() {
         return userId;
