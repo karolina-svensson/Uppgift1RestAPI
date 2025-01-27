@@ -42,7 +42,7 @@ public class PlantController {
     @PatchMapping("/{id}")
     public ResponseEntity<Plant> updatePlant(@PathVariable String id, @RequestBody Plant plant) {
         Plant existingPlant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
-        existingPlant.setPrice(plant.getPrice());
+        existingPlant.setStatus(plant.getStatus());
      return ResponseEntity.ok(plantRepository.save(existingPlant));
     }
     @DeleteMapping("/{id}")
