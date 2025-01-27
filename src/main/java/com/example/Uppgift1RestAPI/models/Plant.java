@@ -10,6 +10,7 @@ public class Plant {
     private String id;
     private String trivialName;
     private String scientificName;
+    private String userId;
     private enum Size {
         SMALL, MEDIUM, LARGE
     }
@@ -90,11 +91,18 @@ public class Plant {
         this.price = price;
     }
 
-    public String[] getUrl() {
+    public String[] getPhoto() {
         return photo;
     }
 
-    public void setUrl(String url) {
-        this.photo = new String[]{url};
+    public void setPhoto(String photo) {
+        this.photo = new String[]{photo};
+    }
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
