@@ -14,7 +14,6 @@ public class Transaction {
     private String lastname;
     @DBRef Plant plant;
     private String trivialName;
-    private String scientificName;
     private String status;
     private double price;
 
@@ -64,14 +63,6 @@ public class Transaction {
 
     public void setTrivialName(String trivialName) {
         this.trivialName = trivialName;
-    }
-
-    public String getScientificName() {
-        return scientificName;
-    }
-
-    public void setScientificName(String scientificName) {
-        this.scientificName = scientificName;
     }
 
     public String getStatus() {
