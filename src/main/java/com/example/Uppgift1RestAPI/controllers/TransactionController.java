@@ -32,4 +32,10 @@ public class TransactionController {
         Transaction transaction = transactionRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
         return ResponseEntity.ok(transaction);
     }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable String id, @RequestBody Transaction transaction) {
+        Transaction existingTransaction = transactionRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
+        existingTransaction.setPrice(transaction.getPrice());
+        return ResponseEntity.ok(transactionRepository.save(existingTransaction));
+    }
 }
