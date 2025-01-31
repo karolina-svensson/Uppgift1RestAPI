@@ -53,4 +53,5 @@ public class PlantController {
         plantRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 }
