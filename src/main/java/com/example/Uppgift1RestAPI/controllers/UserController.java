@@ -46,5 +46,11 @@ public class UserController {
         userRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-}
+    // Se växter tillhörande en user via userId. Denna funkar inte och jag kommenterade ut då den hindrade programmet från att köra
+    /*@GetMapping("/users/{id}/plants")
+    public ResponseEntity<List<Plant>> getPlantsByUser (@PathVariable String userId) {
+        List<Plant> plants = userRepository.findByUserId();
+        return ResponseEntity.ok(plants);*/
+    }
+
 
