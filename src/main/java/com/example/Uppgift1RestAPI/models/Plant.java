@@ -19,6 +19,8 @@ public class Plant {
     private String waterRequirement;
     private int maintainingDifficulty;
     private String requests;
+
+    //@Positive(message = "Price must be greater than 0")
     private double price;
     private String photo;
     private  String status;

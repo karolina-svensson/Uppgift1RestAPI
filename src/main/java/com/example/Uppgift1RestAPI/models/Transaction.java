@@ -9,9 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Transaction {
     @Id
     private String id;
+
+    //Refererar till users i users kollektionen
     @DBRef User user;
     private String firstname;
     private String lastname;
+
+    //Refererar till plants i plants kollektionen
     @DBRef Plant plant;
     private String trivialName;
     private String status;

@@ -53,5 +53,11 @@ public class PlantController {
         plantRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/status")
+    public ResponseEntity<List<Plant>> getPlantStatus (@RequestParam String status) {
+        List<Plant> plants = plantRepository.findByStatus("status");
+        return ResponseEntity.ok(plants);
+    }
+
 
 }

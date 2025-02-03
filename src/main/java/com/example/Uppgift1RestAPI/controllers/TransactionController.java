@@ -3,6 +3,7 @@ package com.example.Uppgift1RestAPI.controllers;
 
 import com.example.Uppgift1RestAPI.models.Transaction;
 import com.example.Uppgift1RestAPI.repositories.TransactionRepository;
+import com.example.Uppgift1RestAPI.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import java.util.List;
 public class TransactionController {
     @Autowired
     private TransactionRepository transactionRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
