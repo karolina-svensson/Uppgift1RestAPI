@@ -1,6 +1,10 @@
 package com.example.Uppgift1RestAPI.models;
 
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,7 +24,11 @@ public class Plant {
     private int maintainingDifficulty;
     private String requests;
 
-    //@Positive(message = "Price must be greater than 0")
+    // Validering för pris (måste vara mellan 50-1000)
+    @PositiveOrZero(message = "Price can not be negative")
+    @Positive(message = "Price must be more than 0")
+    @Min(50)
+    @Max(1000)
     private double price;
     private String photo;
     private  String status;
@@ -82,9 +90,10 @@ public class Plant {
 
     public void setRequests(String requests) {
         this.requests = requests;
+
     }
 
-    public double getPrice() {
+            public double getPrice() {
         return price;
     }
 
@@ -120,6 +129,7 @@ public class Plant {
 
     public void setStatus(String status) {
         this.status = status;
+
     }
 
 }

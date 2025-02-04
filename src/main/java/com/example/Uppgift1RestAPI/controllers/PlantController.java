@@ -7,11 +7,12 @@ import com.example.Uppgift1RestAPI.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
+@Validated
 @RestController
 @RequestMapping("/api/plants")
 public class PlantController {
@@ -22,7 +23,7 @@ public class PlantController {
 
     // Lägg till växt i databasen
     @PostMapping
-    public ResponseEntity<Plant> createPlant(@RequestBody Plant plant) {
+    public ResponseEntity<Plant> createPlant(@Validated @RequestBody Plant plant) {
         if(plant.getUser() != null && !userRepository.existsById(plant.getUser().getId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
         }
@@ -43,7 +44,7 @@ public class PlantController {
     }
     // Ändra växtstatus via id
     @PatchMapping("/{id}")
-    public ResponseEntity<Plant> updatePlant(@PathVariable String id, @RequestBody Plant plant) {
+    public ResponseEntity<Plant> updatePlant(@Validated @PathVariable String id, @RequestBody Plant plant) {
         Plant existingPlant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
         existingPlant.setStatus(plant.getStatus());
      return ResponseEntity.ok(plantRepository.save(existingPlant));
