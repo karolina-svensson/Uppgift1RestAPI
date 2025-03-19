@@ -1,10 +1,7 @@
 package com.example.Uppgift1RestAPI.models;
 
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,15 +10,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Plant {
     @Id
     private String id;
+    @NotNull
     private String trivialName;
+    @NotNull
     private String scientificName;
 
     @DBRef User user;
 
-    private String size;
+    @NotNull
+    private Size size;
+    @NotNull
     private String lightRequirement;
+    @NotNull
     private String waterRequirement;
+
+    @NotNull
+    @Min(value = 1, message = "Mantaining difficulty can not be less than 1")
+    @Max(value = 5, message = "Mantaining difficulty can not be more than 5")
     private int maintainingDifficulty;
+    @NotNull
     private String requests;
 
     // Validering för pris (måste vara mellan 50-1000)
@@ -31,7 +38,7 @@ public class Plant {
     @Max(1000)
     private double price;
     private String photo;
-    private  String status;
+    private  Status status;
 
     public Plant() {
     }
@@ -115,19 +122,19 @@ public class Plant {
     public void setUser(User user) {
         this.user = user;
     }
-    public String getSize() {
+    public Size size() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize (Size size) {
         this.size = size;
     }
 
-    public String getStatus() {
+    public Status status() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
 
     }

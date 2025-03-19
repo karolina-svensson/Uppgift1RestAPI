@@ -2,6 +2,7 @@ package com.example.Uppgift1RestAPI.controllers;
 
 
 import com.example.Uppgift1RestAPI.models.User;
+import com.example.Uppgift1RestAPI.repositories.PlantRepository;
 import com.example.Uppgift1RestAPI.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PlantRepository plantRepository;
 
     // Lägg till user
     @PostMapping
@@ -51,11 +54,5 @@ public class UserController {
         userRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-    // Se växter tillhörande en user via userId. Denna funkar inte och jag kommenterade ut då den hindrade programmet från att köra
-    /*@GetMapping("/users/{id}/plants")
-    public ResponseEntity<List<Plant>> getPlantsByUser (@PathVariable String userId) {
-        List<Plant> plants = userRepository.findByUserId();
-        return ResponseEntity.ok(plants);*/
-    }
-
+}
 

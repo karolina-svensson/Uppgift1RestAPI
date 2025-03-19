@@ -45,10 +45,13 @@ public class TransactionController {
         existingTransaction.setPrice(transaction.getPrice());
         return ResponseEntity.ok(transactionRepository.save(existingTransaction));
     }
-    // Se transaktioner via userId. Denna funkar inte för mig...
+    // Se transaktioner via userId
     @GetMapping("/transactions/user/{userId}")
-    public ResponseEntity<List<Transaction>> getUserTransaction (@PathVariable String userId) {
-        List<Transaction> transactions = transactionRepository.findByUserId();
+    public ResponseEntity<List<Transaction>> getUserTransaction(@PathVariable String userId) {
+        List<Transaction> transactions = transactionRepository.findByUserId(userId);
+        if (transactions.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(transactions);
-}
+    }
 }

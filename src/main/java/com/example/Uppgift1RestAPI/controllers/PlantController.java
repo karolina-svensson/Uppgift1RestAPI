@@ -2,6 +2,7 @@ package com.example.Uppgift1RestAPI.controllers;
 
 
 import com.example.Uppgift1RestAPI.models.Plant;
+import com.example.Uppgift1RestAPI.models.Status;
 import com.example.Uppgift1RestAPI.repositories.PlantRepository;
 import com.example.Uppgift1RestAPI.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,11 +43,10 @@ public class PlantController {
         Plant plant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
         return ResponseEntity.ok(plant);
     }
-    // Ändra växtstatus via id
+    // Ändra växt via id
     @PatchMapping("/{id}")
     public ResponseEntity<Plant> updatePlant(@Validated @PathVariable String id, @RequestBody Plant plant) {
         Plant existingPlant = plantRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Plant not found"));
-        existingPlant.setStatus(plant.getStatus());
      return ResponseEntity.ok(plantRepository.save(existingPlant));
     }
     // Ta bort växt via id
@@ -58,12 +58,22 @@ public class PlantController {
         plantRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-    // Denna verkar inte funka i min Postman API...
-    @GetMapping("/status")
-    public ResponseEntity<List<Plant>> getPlantStatus (@RequestParam String status) {
-        List<Plant> plants = plantRepository.findByStatus("tillgänglig");
+    // Hitta växt via user id
+    @GetMapping("/users/plants/{id}")
+    public ResponseEntity<List<Plant>> getPlantsByUser(@PathVariable String id) {
+        List<Plant> plants = plantRepository.findByUserId(id);
+        if (plants.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(plants);
     }
+    // Hitta växt via status
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<Plant>> getPlantByStatus(@PathVariable Status status) {
+        List<Plant> plants = plantRepository.findByStatus(status);
+        return ResponseEntity.ok(plants);
+    }
+
 
 
 }
